@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SANJIVINI – Apna Bharosa</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+        
+        .nav-link:hover {
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: white;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .dashboard-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-subtitle {
+            opacity: 0.9;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-left: 4px solid #dc2626;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .action-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #fee2e2;
+            cursor: pointer;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-color: #dc2626;
+        }
+        
+        .action-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .action-title {
+            font-size: 1.2rem;
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .action-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .stats-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="nav-brand">🚑 SANJIVINI</a>
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">Home</a>
+                <a href="emergency-details.html" class="nav-link">Services</a>
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <span id="username">Admin</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <h1 class="dashboard-title">🏥 Emergency Response Dashboard</h1>
+            <p class="dashboard-subtitle">Real-time monitoring and control center</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Stats Overview -->
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <div class="stat-number" id="activePatients">0</div>
+                    <div class="stat-label">Active Patients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="availableAmbulances">3</div>
+                    <div class="stat-label">Available Ambulances</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalProcessed">0</div>
+                    <div class="stat-label">Total Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgResponse">15min</div>
+                    <div class="stat-label">Avg Response Time</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h2 style="color: #dc2626; margin-bottom: 1rem;">⚡ Quick Actions</h2>
+            <div class="quick-actions">
+                <div class="action-card" onclick="window.location.href='dashboard.html#patient-form'">
+                    <span class="action-icon">➕</span>
+                    <div class="action-title">Add Patient</div>
+                    <div class="action-description">Register a new emergency patient</div>
+                </div>
+                <div class="action-card" onclick="processEmergency()">
+                    <span class="action-icon">🚨</span>
+                    <div class="action-title">Process Emergency</div>
+                    <div class="action-description">Handle highest priority case</div>
+                </div>
+                <div class="action-card" onclick="viewAnalytics()">
+                    <span class="action-icon">📊</span>
+                    <div class="action-title">View Analytics</div>
+                    <div class="action-description">System performance metrics</div>
+                </div>
+                <div class="action-card" onclick="manageHospitals()">
+                    <span class="action-icon">🏨</span>
+                    <div class="action-title">Manage Hospitals</div>
+                    <div class="action-description">Update hospital information</div>
+                </div>
+            </div>
+
+            <!-- Dijkstra's Algorithm is implemented internally in backend/frontend -->
+            <!-- Main Grid Layout -->
+            <div class="main-grid">
+                <!-- Patient Input Form -->
+                <section class="card patient-form-card" id="patient-form">
+                    <h2>📋 Add Patient Details</h2>
+                    <form id="patientForm">
+                        <div class="form-group">
+                            <label for="locationNode">Patient Location:</label>
+                            <select id="locationNode" name="locationNode" required>
+                                <option value="">Select location in Dehradun</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="severity">Severity:</label>
+                            <select id="severity" name="severity" required>
+                                <option value="">Select severity</option>
+                                <option value="1">1 - Minor</option>
+                                <option value="2">2 - Mild</option>
+                                <option value="3">3 - Moderate</option>
+                                <option value="4">4 - Severe</option>
+                                <option value="5">5 - Critical</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="condition">Condition:</label>
+                            <input type="text" id="condition" name="condition" placeholder="e.g., Heart Attack, Brain Injury" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="insurance">Insurance:</label>
+                            <select id="insurance" name="insurance" required>
+                                <option value="">Select insurance status</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">➕ Add Patient</button>
+                    </form>
+                </section>
+
+                <!-- Emergency Queue -->
+                <section class="card queue-card">
+                    <h2>⚡ Emergency Queue</h2>
+                    <div id="emergencyQueue" class="queue-content">
+                        <p class="placeholder">No patients in queue.</p>
+                    </div>
+                </section>
+
+                <!-- Emergency Display Section -->
+                <section class="card display-card">
+                    <h2>🏥 Emergency Response Details</h2>
+                    <div id="emergencyDisplay" class="display-content">
+                        <p class="placeholder">No emergency processed yet. Add a patient and click "Process Emergency".</p>
+                    </div>
+                </section>
+
+                <!-- Hospital Info Panel -->
+                <section class="card hospital-card">
+                    <h2>🏨 Hospital Information</h2>
+                    <div id="hospitalInfo" class="hospital-content">
+                        <p class="placeholder">No hospital selected yet.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="processBtn" class="btn btn-success" onclick="processEmergency()">🚨 Process Emergency</button>
+                <button id="clearBtn" class="btn btn-danger" onclick="clearAllData()">🗑️ Clear Data</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 SANJIVINI – Apna Bharosa | Student Project | Saving Lives Through Technology</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Check if user is logged in
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        // Set user info
+        const username = sessionStorage.getItem('username') || 'Admin';
+        document.getElementById('username').textContent = username;
+        document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            showAlert('Logged out successfully!', 'success');
+            setTimeout(() => {
+                window.location.href = 'about.html';
+            }, 1000);
+        }
+
+        // Quick action handlers
+        // viewAnalytics and manageHospitals are now in script.js with real data functionality
+
+        // Update dashboard stats
+        function updateDashboardStats() {
+            const activePatients = patients.length;
+            const totalProcessed = parseInt(localStorage.getItem('totalProcessed') || '0');
+            
+            document.getElementById('activePatients').textContent = activePatients;
+            document.getElementById('totalProcessed').textContent = totalProcessed;
+            
+            // Simulate real-time updates
+            if (activePatients > 0) {
+                const avgResponse = Math.floor(Math.random() * 3) + 2; // 2-4 minutes
+                document.getElementById('avgResponse').textContent = avgResponse + 'min';
+            }
+        }
+
+        // Override the original processEmergency function to update stats
+        const originalProcessEmergency = window.processEmergency;
+        window.processEmergency = function() {
+            originalProcessEmergency();
+            
+            // Update total processed count
+            const totalProcessed = parseInt(localStorage.getItem('totalProcessed') || '0') + 1;
+            localStorage.setItem('totalProcessed', totalProcessed);
+            
+            // Update dashboard stats
+            updateDashboardStats();
+        };
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDashboardStats();
+            
+            // Update stats every 30 seconds
+            setInterval(updateDashboardStats, 30000);
+        });
+    </script>
+</body>
+</html>

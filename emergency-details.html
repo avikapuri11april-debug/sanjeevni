@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Services - SANJIVINI – Apna Bharosa</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+        
+        .nav-link:hover {
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .services-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #dc2626;
+            margin-bottom: 3rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid #fee2e2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #dc2626, #b91c1c);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-color: #dc2626;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            color: #dc2626;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .service-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #374151;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        .service-action {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-primary-small {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+        }
+        
+        .btn-primary-small:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+        }
+        
+        .btn-secondary-small {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-secondary-small:hover {
+            background: #e5e7eb;
+            transform: translateY(-2px);
+        }
+        
+        .emergency-types {
+            background: #f9fafb;
+            padding: 4rem 0;
+        }
+        
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .emergency-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .emergency-card:hover {
+            border-color: #dc2626;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .emergency-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .emergency-name {
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .emergency-severity {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .severity-high {
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        .severity-medium {
+            color: #f97316;
+            font-weight: bold;
+        }
+        
+        .severity-low {
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        .process-section {
+            padding: 4rem 0;
+        }
+        
+        .process-timeline {
+            max-width: 800px;
+            margin: 3rem auto;
+            position: relative;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #dc2626;
+            transform: translateX(-50%);
+        }
+        
+        .process-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .process-content {
+            width: 45%;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid #fee2e2;
+        }
+        
+        .process-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .process-title {
+            color: #dc2626;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .process-description {
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .emergency-hotline {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .process-timeline::before {
+                left: 20px;
+            }
+            
+            .process-step {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding-left: 60px;
+            }
+            
+            .process-content {
+                width: 100%;
+            }
+            
+            .process-number {
+                left: 20px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="about.html" class="nav-brand">🚑 SANJIVINI</a>
+            <div class="nav-links">
+                <a href="about.html" class="nav-link">Home</a>
+                <a href="emergency-details.html" class="nav-link active">Services</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">🚨 Emergency Response Services</h1>
+            <p class="hero-subtitle">Comprehensive emergency medical services at your fingertips</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">🏥 Our Emergency Services</h2>
+            <div class="services-grid">
+                <!-- Ambulance Service -->
+                <div class="service-card">
+                    <span class="service-icon">🚑</span>
+                    <h3 class="service-title">Ambulance Dispatch</h3>
+                    <p class="service-description">
+                        Rapid ambulance deployment with real-time tracking and trained medical personnel.
+                    </p>
+                    <ul class="service-features">
+                        <li>GPS-enabled ambulances</li>
+                        <li>Trained paramedics on board</li>
+                        <li>Basic life support equipment</li>
+                        <li>Real-time location tracking</li>
+                    </ul>
+                    <div class="service-action">
+                        <button class="btn-small btn-primary-small" onclick="requestAmbulance()">Request Now</button>
+                        <button class="btn-small btn-secondary-small" onclick="learnMore('ambulance')">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Hospital Coordination -->
+                <div class="service-card">
+                    <span class="service-icon">🏨</span>
+                    <h3 class="service-title">Hospital Coordination</h3>
+                    <p class="service-description">
+                        Smart hospital matching based on patient condition, severity, and insurance coverage.
+                    </p>
+                    <ul class="service-features">
+                        <li>50+ partner hospitals</li>
+                        <li>Specialized medical facilities</li>
+                        <li>Insurance verification</li>
+                        <li>Bed availability check</li>
+                    </ul>
+                    <div class="service-action">
+                        <button class="btn-small btn-primary-small" onclick="findHospital()">Find Hospital</button>
+                        <button class="btn-small btn-secondary-small" onclick="learnMore('hospital')">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Emergency Triage -->
+                <div class="service-card">
+                    <span class="service-icon">⚡</span>
+                    <h3 class="service-title">Emergency Triage</h3>
+                    <p class="service-description">
+                        AI-powered patient prioritization ensuring critical cases receive immediate attention.
+                    </p>
+                    <ul class="service-features">
+                        <li>Severity-based prioritization</li>
+                        <li>Condition-specific routing</li>
+                        <li>Resource optimization</li>
+                        <li>Queue management</li>
+                    </ul>
+                    <div class="service-action">
+                        <button class="btn-small btn-primary-small" onclick="startTriage()">Start Triage</button>
+                        <button class="btn-small btn-secondary-small" onclick="learnMore('triage')">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Medical Consultation -->
+                <div class="service-card">
+                    <span class="service-icon">👨‍⚕️</span>
+                    <h3 class="service-title">Telemedicine Support</h3>
+                    <p class="service-description">
+                        Immediate medical consultation with certified doctors while waiting for ambulance.
+                    </p>
+                    <ul class="service-features">
+                        <li>24/7 doctor availability</li>
+                        <li>Audio consultation</li>
+                        <li>First aid guidance</li>
+                        <li>Medical records integration</li>
+                    </ul>
+                    <div class="service-action">
+                        <button class="btn-small btn-primary-small" onclick="consultDoctor()">Consult Now</button>
+                        <button class="btn-small btn-secondary-small" onclick="learnMore('telemedicine')">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Medical Records -->
+                <div class="service-card">
+                    <span class="service-icon">📋</span>
+                    <h3 class="service-title">Medical Records</h3>
+                    <p class="service-description">
+                        Secure access to patient medical history for better emergency treatment.
+                    </p>
+                    <ul class="service-features">
+                        <li>Digital health records</li>
+                        <li>Allergy information</li>
+                        <li>Medication history</li>
+                        <li>Emergency contacts</li>
+                    </ul>
+                    <div class="service-action">
+                        <button class="btn-small btn-primary-small" onclick="accessRecords()">Access Records</button>
+                        <button class="btn-small btn-secondary-small" onclick="learnMore('records')">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Types Section -->
+    <section class="emergency-types">
+        <div class="container">
+            <h2 class="section-title">🚨 Emergency Types We Handle</h2>
+            <div class="emergency-grid">
+                <div class="emergency-card" onclick="handleEmergency('cardiac')">
+                    <span class="emergency-icon">❤️</span>
+                    <div class="emergency-name">Cardiac Emergency</div>
+                    <div class="emergency-severity severity-high">High Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('stroke')">
+                    <span class="emergency-icon">🧠</span>
+                    <div class="emergency-name">Stroke/Brain</div>
+                    <div class="emergency-severity severity-high">High Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('trauma')">
+                    <span class="emergency-icon">🦴</span>
+                    <div class="emergency-name">Trauma/Injury</div>
+                    <div class="emergency-severity severity-high">High Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('respiratory')">
+                    <span class="emergency-icon">🫁</span>
+                    <div class="emergency-name">Respiratory</div>
+                    <div class="emergency-severity severity-medium">Medium Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('pregnancy')">
+                    <span class="emergency-icon">🤰</span>
+                    <div class="emergency-name">Pregnancy</div>
+                    <div class="emergency-severity severity-medium">Medium Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('pediatric')">
+                    <span class="emergency-icon">👶</span>
+                    <div class="emergency-name">Pediatric</div>
+                    <div class="emergency-severity severity-medium">Medium Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('poisoning')">
+                    <span class="emergency-icon">☠️</span>
+                    <div class="emergency-name">Poisoning</div>
+                    <div class="emergency-severity severity-high">High Priority</div>
+                </div>
+                <div class="emergency-card" onclick="handleEmergency('burns')">
+                    <span class="emergency-icon">🔥</span>
+                    <div class="emergency-name">Burns</div>
+                    <div class="emergency-severity severity-high">High Priority</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">🚨 Emergency Hotline</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">Available 24/7 for all medical emergencies</p>
+            <div class="emergency-hotline">108</div>
+            <p style="margin-bottom: 2rem;">For non-emergency inquiries: 📞 1800-SANJIVINI</p>
+            <div class="contact-buttons">
+                <a href="login.html" class="btn btn-primary" style="background: white; color: #dc2626;">🚀 Launch Emergency App</a>
+                <button class="btn btn-secondary" style="background: transparent; color: white; border: 2px solid white;" onclick="callHotline()">📞 Call Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 SANJIVINI – Apna Bharosa | Student Project | Saving Lives Through Technology</p>
+        </div>
+    </footer>
+
+    <script>
+        // Service action handlers
+        function requestAmbulance() {
+            showAlert('Ambulance request initiated! Redirecting to emergency form...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        }
+
+        function findHospital() {
+            showAlert('Loading hospital finder...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        function startTriage() {
+            showAlert('Starting emergency triage system...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        function consultDoctor() {
+            showAlert('Connecting to available doctor for audio consultation...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        function requestBlood() {
+            showAlert('Accessing blood bank network...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        function accessRecords() {
+            showAlert('Loading medical records...', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        function learnMore(service) {
+            const messages = {
+                ambulance: 'Our ambulance fleet is equipped with advanced life support systems and GPS tracking.',
+                hospital: 'We partner with 50+ hospitals including specialized cardiac, neuro, and trauma centers.',
+                triage: 'Our AI-powered triage system ensures critical patients get priority care.',
+                telemedicine: 'Get immediate medical consultation while waiting for emergency services.',
+                records: 'Secure digital medical records for faster and more accurate emergency treatment.'
+            };
+            showAlert(messages[service] || 'Loading more information...', 'success');
+        }
+
+        function handleEmergency(type) {
+            const emergencyMessages = {
+                cardiac: 'Cardiac emergency detected! Priority ambulance dispatch initiated.',
+                stroke: 'Stroke emergency activated! Neuro-specialist team notified.',
+                trauma: 'Trauma response team activated! Life support ambulance dispatched.',
+                respiratory: 'Respiratory emergency! Oxygen-equipped ambulance on the way.',
+                pregnancy: 'Maternity emergency activated! Obstetric team notified.',
+                pediatric: 'Pediatric emergency! Child specialist ambulance dispatched.',
+                poisoning: 'Poisoning emergency! Toxicology team alerted.',
+                burns: 'Burns emergency activated! Specialized burn unit notified.'
+            };
+            
+            showAlert(emergencyMessages[type] || 'Emergency response initiated!', 'success');
+            
+            // Add visual feedback
+            event.currentTarget.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                event.currentTarget.style.transform = '';
+            }, 200);
+        }
+
+        function callHotline() {
+            showAlert('Dialing emergency hotline 108...', 'success');
+            // In a real app, this would initiate a phone call
+        }
+
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert ${type === 'error' ? 'error' : ''}`;
+            alert.textContent = message;
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: ${type === 'error' ? '#dc2626' : '#16a34a'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+
+        // Add animation to emergency cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.5s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.emergency-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

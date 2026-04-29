@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SANJIVINI – Apna Bharosa</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="100" fill="rgba(255,255,255,0.05)">🚑</text></svg>');
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .login-title {
+            color: #dc2626;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-subtitle {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+        }
+        
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        
+        .demo-credentials {
+            background: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        
+        .demo-credentials h4 {
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-credentials p {
+            margin: 0.25rem 0;
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .back-to-home a {
+            color: #dc2626;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .back-to-home a:hover {
+            color: #b91c1c;
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">🚑</div>
+                <h1 class="login-title">SANJIVINI</h1>
+                <p class="login-subtitle">Apna Bharosa - Smart Emergency Response System</p>
+            </div>
+            
+            <div id="errorMessage" class="error-message">
+                Invalid credentials. Please try again.
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">🔐 Login to System</button>
+            </form>
+            
+            <div class="back-to-home">
+                <a href="about.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Simple authentication simulation
+            if (username && password) {
+                // Store login session
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('username', username);
+                
+                // Show success message
+                showAlert('Login successful! Redirecting...', 'success');
+                
+                // Redirect to dashboard after a short delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+        
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert ${type === 'error' ? 'error' : ''}`;
+            alert.textContent = message;
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: ${type === 'error' ? '#dc2626' : '#16a34a'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+        
+        // Check if already logged in
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

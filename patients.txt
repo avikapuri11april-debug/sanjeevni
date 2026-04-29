@@ -1,0 +1,8 @@
+A 5 heart any 1
+E 2 trauma central 0
+B 5 surgery any 1
+A 5 neuro any 0
+A 5 hert any 1
+A 5 cardiac any 0
+A 5 surgery any 1
+C 1 fever private 0
